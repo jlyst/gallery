@@ -2,7 +2,7 @@
 
 ### What is Gallery?
 
-[Gallery](https://galleries.idew.org) is an online platform where students share project work with the public. Gallery orients the public to what students are doing in class and facilitates basic feedback.
+[Gallery](https://galleries.idew.org) is an online platform where students share project work with the public. Gallery posts orient the public to what students are doing in class and facilitates remote feedback.
 
 ### Who is it for?
 
@@ -10,10 +10,10 @@ It is for students, teachers, industry professionals, and community members, who
 
 ### What value does it bring?
 
-Gallery encourages deeper engagement that aligns the needs of students, industry and community. Students have a better view of the challenges and opportunities before them, while industry and comminity influence the perparedness and quality of students beginning to participate in the market.
+Gallery encourages deeper engagement between students, industry and community. Students gain early insight to industry practices and opportunities, while industry and comminity influence the perparedness and work quality of students looking to participate in the market.
 
 ## Preliminary Development Plan
-The alpha version of the Gallery application will be used to conduct UX activities, while the code base is reworked using a standard framework. Below are provisional outlines for development, where much of the UX and code activities will occur in parallel.
+The live alpha version of the Gallery application will be used to conduct UX activities. In parallel, the code base will be reworked using a standard framework to improve the integrity and design flexibility of the application. Below are the provisional outlines for development.
 
 ### UX
 Phase 1 (Expert Review)
