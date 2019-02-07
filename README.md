@@ -2,7 +2,7 @@
 
 ### What is Gallery?
 
-[Gallery](https://galleries.idew.org) is an online platform that where students share in-class project work with the public. Gallery orients the public remotely to what students are doing in class and provides a conduit for basic feedback.
+[Gallery](https://galleries.idew.org) is an online platform that where students share project work with the public. Gallery orients the public to what students are doing in class and facilitates basic feedback.
 
 ### Who is it for?
 
