@@ -13,6 +13,7 @@ It is for students, teachers, industry professionals, and community members, who
 Gallery encourages deeper engagement that aligns the needs of students, industry and community. Students have a better view of the challenges and opportunities before them, while industry and comminity influence the perparedness and quality of students beginning to participate in the market.
 
 ## Preliminary Development Plan
+The alpha version of the Gallery application will be used to conduct UX activities, while the code base is reworked using a standard framework. Below are provisional outlines for development, where much of the UX and code activities will occur in parallel.
 
 ### UX
 Phase 1 (Expert Review)
