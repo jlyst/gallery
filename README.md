@@ -13,27 +13,18 @@ It is for students, teachers, industry professionals, and community members, who
 Gallery encourages deeper engagement between students, industry and community. Students gain early insight to industry practices and opportunities, while industry and comminity influence the perparedness and work quality of students looking to participate in the market.
 
 ## Preliminary Development Plan
-The live alpha version of the Gallery application will be used to conduct UX activities. In parallel, the code base will be reworked using a standard framework to improve the integrity and design flexibility of the application. Below are the provisional outlines for development.
 
-### UX
-Phase 1 (Expert Review)
-- Develop Initial Value Statement, Stakeholder Profiles, User Personas, Requirements
-- Create Interaction Storyboards of Existing Application
-- Conduct Task Analysis
-- Investigate Technical Opportunities and Constraints
-- Determine Key Research Needs and Initial Ideas to Investigate
+### Milestone 1
 
-Phase 2 (Stakeholder/User Research)
-- Interview Stakeholders
-- Conduct Usability Study
-- Prototype Several Design Improvements
-- Follow-up Usability Study
-- Refine the Preferred Design Improvements for Technical Review
+*UX*
+- Evaluate the live alpha version of the Gallery application to identify high-priority usablity issues. 
+- Develop UX stakeholder profiles, user personas, and plan task analyses.
+- Conduct expert analyses of the tasks and develop initial concepts to propose.
+- Prepare user research, likely interview scripts and walk-through studies.
 
-Phase 3 (Evaluate and Refine Application)
-- Conduct Usability Study of Updated Live Application
-- Outline Recommended Improvements
+*Code*
+- Rework the code base using a standard framework, Vue.js, to improve the integrity and design flexibility of the application.
+- Refactor/clean code as needed.
+- Correct basic usability issues or bugs as they are identified.
+- Implement any low-hanging fruit enhancements.
 
-### Code
-
-Coming...
