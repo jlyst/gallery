@@ -12,7 +12,7 @@ It is for students, teachers, industry professionals, and community members, who
 
 Gallery encourages deeper engagement between students, industry and community. Students gain early insight to industry practices and opportunities, while industry and comminity influence the perparedness and work quality of students looking to participate in the market.
 
-## Preliminary Development Plan
+## Maintenance/Development Plan
 
 ### Milestone 1
 
