@@ -11,53 +11,52 @@
 </template>
 
 <script>
-    import {
-        db,
-        user,
-        utils
-    } from '../main'
-    export default {
-        name: 'CommentList',
-        props: ['pid', 'puid', 'cid'],
-        data() {
-            return {
-                comments: [],
-                u: user
-            }
-        },
-        computed: {
-//            isTeacher: user.classes ? user.classes.findIndex(c=>{return c.id==this.cid}) > -1 : false
-        },
-        methods: {
-            deleteComment: function (id) {
-                var r = confirm("This will forever remove this comment!");
-                if (r == true) {
-                    db.collection("comments").doc(id).delete().then(() => {
-                        
-                    }).catch((e) => {
-                        alert(e);
-                    });
-                }
-            }
-        },
-        
-        firestore() {
-            return {
-                comments: this.puid == this.u.data.uid ? db.collection('comments')
-                    .where("pid", "==", this.pid)
-                    .orderBy('timestamp', 'desc') :
-                    db.collection('comments')
-                    .where("pid", "==", this.pid)
-                    .where("uid", "==", this.u.data.uid)
-                    .orderBy('timestamp', 'desc')
-            }
-        }
+import {
+  db,
+  user,
+  utils
+} from '../main'
+export default {
+  name: 'CommentList',
+  props: ['pid', 'puid', 'cid'],
+  data () {
+    return {
+      comments: [],
+      u: user
     }
+  },
+  computed: {
+    //            isTeacher: user.classes ? user.classes.findIndex(c=>{return c.id==this.cid}) > -1 : false
+  },
+  methods: {
+    deleteComment: function (id) {
+      var r = confirm('This will forever remove this comment!')
+      if (r == true) {
+        db.collection('comments').doc(id).delete().then(() => {
+
+        }).catch((e) => {
+          alert(e)
+        })
+      }
+    }
+  },
+
+  firestore () {
+    return {
+      comments: this.puid == this.u.data.uid ? db.collection('comments')
+        .where('pid', '==', this.pid)
+        .orderBy('timestamp', 'desc')
+        : db.collection('comments')
+          .where('pid', '==', this.pid)
+          .where('uid', '==', this.u.data.uid)
+          .orderBy('timestamp', 'desc')
+    }
+  }
+}
 
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-
 
 </style>

@@ -5,9 +5,9 @@
 </template>
 
 <script>
-    export default {
-        name: 'App'
-    }
+export default {
+  name: 'App'
+}
 
 </script>
 
@@ -21,7 +21,7 @@
         height: 100%;
         background: #fcfcfc;
     }
-    
+
     hr {
         display: block;
         height: 1px;
@@ -30,7 +30,7 @@
         margin: 1em 0;
         padding: 0;
     }
-    
+
     h3 {
         font-weight: 300;
     }
@@ -87,7 +87,7 @@
         width: 100%;
         position: relative;
     }
-    
+
     @media only screen and (max-width: 950px) {
     #nav-container {
         padding-left: 8px;

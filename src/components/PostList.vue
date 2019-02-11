@@ -28,55 +28,55 @@
 </template>
 
 <script>
-    import {
-        db,
-        utils
-    } from '../main'
-    export default {
-        name: 'PostList',
-        props: ['id', 'slug', 'cname'],
-        data() {
-            return {
-                posts: [],
-                sortedPosts: [],
-                classes: [],
-                clss: this.cname ? this.cname : "",
-                old: false,
-                utils: utils
-            }
-        },
-        watch: {
-            posts: function(arr) {
-                function compare(a, b) {
-                    return (a.award || b.award) ? (!a.award ? 1 : !b.award ? -1 : a.award.localeCompare(b.award)) : 0;
-                }
-                this.sortedPosts = arr.slice().sort(compare);
-                var fltr = arr.filter(p => p.classname);//in case no class
-                var cs = fltr.map(p => p.classname);
-                this.classes = [...new Set(cs)]; //get unique
-                this.classes.sort();
-                this.$emit("post-count",arr.length);
-            },
-            clss: function(c) {
-                if (c) this.$router.replace(`/g/${this.slug}/c/${c}`)
-                else this.$router.replace(`/g/${this.slug}/`)
-            }
-        },
-        methods: {
-            getFilteredPosts: function(c) {
-                if (c) return this.sortedPosts.filter(post => this.utils.slugify(post.classname) == c);
-                else return this.sortedPosts;
-            }
-        },
-        firestore() {
-            return {
-                posts: db.collection('posts')
-                    .where("gid", "==", this.id)
-                    .orderBy('timestamp', 'desc')
-                //.orderBy('award', 'desc')
-            }
-        }
+import {
+  db,
+  utils
+} from '../main'
+export default {
+  name: 'PostList',
+  props: ['id', 'slug', 'cname'],
+  data () {
+    return {
+      posts: [],
+      sortedPosts: [],
+      classes: [],
+      clss: this.cname ? this.cname : '',
+      old: false,
+      utils: utils
     }
+  },
+  watch: {
+    posts: function (arr) {
+      function compare (a, b) {
+        return (a.award || b.award) ? (!a.award ? 1 : !b.award ? -1 : a.award.localeCompare(b.award)) : 0
+      }
+      this.sortedPosts = arr.slice().sort(compare)
+      var fltr = arr.filter(p => p.classname)// in case no class
+      var cs = fltr.map(p => p.classname)
+      this.classes = [...new Set(cs)] // get unique
+      this.classes.sort()
+      this.$emit('post-count', arr.length)
+    },
+    clss: function (c) {
+      if (c) this.$router.replace(`/g/${this.slug}/c/${c}`)
+      else this.$router.replace(`/g/${this.slug}/`)
+    }
+  },
+  methods: {
+    getFilteredPosts: function (c) {
+      if (c) return this.sortedPosts.filter(post => this.utils.slugify(post.classname) == c)
+      else return this.sortedPosts
+    }
+  },
+  firestore () {
+    return {
+      posts: db.collection('posts')
+        .where('gid', '==', this.id)
+        .orderBy('timestamp', 'desc')
+      // .orderBy('award', 'desc')
+    }
+  }
+}
 
 </script>
 

@@ -27,26 +27,26 @@
 </template>
 
 <script>
-    import {
-        user
-    } from '../main'
+import {
+  user
+} from '../main'
 
-    export default {
-        name: 'Navigation',
-        props: ["title", "view", "history", "uid"],
-        data() {
-            return {
-                u: user
-            }
-        },
-        methods: {
-            goBack: function(h) {
-                window.history.length > 1 && h != '/' ?
-                    this.$router.go(-1) :
-                    this.$router.push(h)
-            }
-        }
+export default {
+  name: 'Navigation',
+  props: ['title', 'view', 'history', 'uid'],
+  data () {
+    return {
+      u: user
     }
+  },
+  methods: {
+    goBack: function (h) {
+      window.history.length > 1 && h != '/'
+        ? this.$router.go(-1)
+        : this.$router.push(h)
+    }
+  }
+}
 
 </script>
 
@@ -63,7 +63,7 @@
         box-sizing: border-box;
         margin: 12px 0px;
     }
-    
+
     .profile>i {
         font-size: 32px;
         line-height: 55px;
@@ -91,7 +91,6 @@
         top: 0;
         z-index: 1;
     }
-
 
     #nav-container {
         display: flex;
@@ -134,7 +133,7 @@
         max-height: 100%;
         text-align: center;
     }
-    
+
     @media only screen and (max-width: 950px) {
         #nav-container {
             padding-left: 8px;

@@ -13,49 +13,49 @@
 </template>
 
 <script>
-    import {
-        db,user
-    } from '../main'
-    import Navigation from './Navigation.vue';
-    import PostList from './PostList.vue';
-    export default {
-        name: 'Gallery',
-        components: {
-            Navigation,
-            PostList
-        },
-        created: function(){
-            document.title = "Gallery";
-        },
-        data() {
-            return {
-                galleries: [{}],
-                u: user,
-                postCount: null,
-                gallery: {}
-            }
-        },
-        watch: {
-            galleries: function () {
-                this.gallery = this.galleries[0];
-            }
-        },
-        methods: {
-            gotoAddPost: function () {
-                this.$router.push(`/np/${this.$route.params.slug}`);
-            },
-            updatePostCount(count) {
-                this.postCount = count;
-            }
-        },
-        firestore() {
-            return {
-                galleries: db.collection('galleries')
-                    .where("slug", "==", this.$route.params.slug)
-                .limit(1) 
-            }
-        }
+import {
+  db, user
+} from '../main'
+import Navigation from './Navigation.vue'
+import PostList from './PostList.vue'
+export default {
+  name: 'Gallery',
+  components: {
+    Navigation,
+    PostList
+  },
+  created: function () {
+    document.title = 'Gallery'
+  },
+  data () {
+    return {
+      galleries: [{}],
+      u: user,
+      postCount: null,
+      gallery: {}
     }
+  },
+  watch: {
+    galleries: function () {
+      this.gallery = this.galleries[0]
+    }
+  },
+  methods: {
+    gotoAddPost: function () {
+      this.$router.push(`/np/${this.$route.params.slug}`)
+    },
+    updatePostCount (count) {
+      this.postCount = count
+    }
+  },
+  firestore () {
+    return {
+      galleries: db.collection('galleries')
+        .where('slug', '==', this.$route.params.slug)
+        .limit(1)
+    }
+  }
+}
 
 </script>
 

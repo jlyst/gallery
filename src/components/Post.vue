@@ -58,100 +58,100 @@
 </template>
 
 <script>
-    import {
-        db,
-        user,
-        fs
-    } from '../main'
-    import Navigation from './Navigation.vue';
-    import CommentList from './CommentList.vue';
-    export default {
-        name: 'Post',
-        components: {
-            Navigation,
-            CommentList
-        },
-        data() {
-            return {
-                post: {},
-                u: user,
-                galleries: [{}],
-                gallery: {}
-            }
-        },
-        created: function() {
-            document.title = "Post";
-        },
-        computed: {
-            isEditor: function() {
-                var is = this.u.data.uid == this.post.uid;
-                var classMatch = this.u.classes.find(e => e.id == this.post.classid)
-                if (classMatch) is = is || classMatch.role == 'teacher';
-                return is;
-            },
-            isTeacher: function() {
-                var is = false;
-                var classMatch = this.u.classes.find(e => e.id == this.post.classid)
-                if (classMatch) is = classMatch.role == 'teacher';
-                return is;
-            },
-            isPro: function() {
-                return this.u.companies.length > 0
-            }
-        },
-        watch: {
-            galleries: function() {
-                this.gallery = this.galleries.length > 0 ? this.galleries[0] : {};
-            }
-        },
-        methods: {
-            postComment: function() {
-                var self = this;
-                var cdata = {
-                    classid: this.post.classid,
-                    classname: this.post.classname,
-                    companyname: this.u.companies.length > 0 ? this.u.companies[0].name : null,
-                    companyid: this.u.companies.length > 0 ? this.u.companies[0].id : null,
-                    pid: this.post.id,
-                    gid: this.gallery.id,
-                    data: this.$refs.commentText.value,
-                    uid: this.u.data.uid,
-                    gtitle: this.gallery.title,
-                    cprompt: this.gallery.commentPrompt,
-                    gslug: this.gallery.slug,
-                    timestamp: fs.FieldValue.serverTimestamp()
-                };
-                db
-                    .collection("comments")
-                    .add(cdata)
-                    .then(function(docRef) {
-                        self.$refs.commentText.value = "";
-                    })
-                    .catch(function(error) {
-                        alert("Error adding document: " + error);
-                    });
-            }
-        },
-        deletePost: function() {
-            var r = confirm("This will forever remove this post!");
-            if (r == true) {
-                db.collection("posts").doc(this.post.id).delete().then(() => {
-                    this.$router.replace(`/g/${this.$route.params.gslug}`);
-                }).catch((e) => {
-                    alert(e);
-                });
-            }
-        },
-        firestore() {
-            return {
-                post: db.collection('posts')
-                    .doc(this.$route.params.pid),
-                galleries: db.collection('galleries')
-                    .where("slug", "==", this.$route.params.gslug)
-                    .limit(1)
-            }
-        }
+import {
+  db,
+  user,
+  fs
+} from '../main'
+import Navigation from './Navigation.vue'
+import CommentList from './CommentList.vue'
+export default {
+  name: 'Post',
+  components: {
+    Navigation,
+    CommentList
+  },
+  data () {
+    return {
+      post: {},
+      u: user,
+      galleries: [{}],
+      gallery: {}
     }
+  },
+  created: function () {
+    document.title = 'Post'
+  },
+  computed: {
+    isEditor: function () {
+      var is = this.u.data.uid == this.post.uid
+      var classMatch = this.u.classes.find(e => e.id == this.post.classid)
+      if (classMatch) is = is || classMatch.role == 'teacher'
+      return is
+    },
+    isTeacher: function () {
+      var is = false
+      var classMatch = this.u.classes.find(e => e.id == this.post.classid)
+      if (classMatch) is = classMatch.role == 'teacher'
+      return is
+    },
+    isPro: function () {
+      return this.u.companies.length > 0
+    }
+  },
+  watch: {
+    galleries: function () {
+      this.gallery = this.galleries.length > 0 ? this.galleries[0] : {}
+    }
+  },
+  methods: {
+    postComment: function () {
+      var self = this
+      var cdata = {
+        classid: this.post.classid,
+        classname: this.post.classname,
+        companyname: this.u.companies.length > 0 ? this.u.companies[0].name : null,
+        companyid: this.u.companies.length > 0 ? this.u.companies[0].id : null,
+        pid: this.post.id,
+        gid: this.gallery.id,
+        data: this.$refs.commentText.value,
+        uid: this.u.data.uid,
+        gtitle: this.gallery.title,
+        cprompt: this.gallery.commentPrompt,
+        gslug: this.gallery.slug,
+        timestamp: fs.FieldValue.serverTimestamp()
+      }
+      db
+        .collection('comments')
+        .add(cdata)
+        .then(function (docRef) {
+          self.$refs.commentText.value = ''
+        })
+        .catch(function (error) {
+          alert('Error adding document: ' + error)
+        })
+    }
+  },
+  deletePost: function () {
+    var r = confirm('This will forever remove this post!')
+    if (r == true) {
+      db.collection('posts').doc(this.post.id).delete().then(() => {
+        this.$router.replace(`/g/${this.$route.params.gslug}`)
+      }).catch((e) => {
+        alert(e)
+      })
+    }
+  },
+  firestore () {
+    return {
+      post: db.collection('posts')
+        .doc(this.$route.params.pid),
+      galleries: db.collection('galleries')
+        .where('slug', '==', this.$route.params.gslug)
+        .limit(1)
+    }
+  }
+}
 
 </script>
 
