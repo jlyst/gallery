@@ -11,12 +11,19 @@
     "start": "npm run dev"
   },
   "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^1.2.14",
+    "@fortawesome/free-solid-svg-icons": "^5.7.1",
+    "@fortawesome/vue-fontawesome": "^0.1.5",
+    "blueimp-load-image": "^2.20.1",
     "firebase": "^5.8.1",
+    "moment": "^2.24.0",
+    "pdfjs-dist": "^2.0.943",
     "vue": "^2.5.2",
     "vue-router": "^3.0.1",
     "vuefire": "^2.0.0-alpha.20"
   },
   "devDependencies": {
+    "@fortawesome/fontawesome-free": "^5.7.1",
     "@vue/cli-plugin-eslint": "^3.4.0",
     "@vue/eslint-config-standard": "^4.0.0",
     "autoprefixer": "^7.1.2",

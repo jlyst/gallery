@@ -9,6 +9,17 @@ import firebase from 'firebase/app'
 import 'firebase/firestore'
 import 'firebase/storage'
 import 'firebase/auth'
+import pdfjsLib from 'pdfjs-dist'
+import loadImage from 'blueimp-load-image'
+
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { faChevronLeft, faUserCircle, faFilePdf, faLink, faImage, faFont } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+
+library.add(faChevronLeft, faUserCircle, faFilePdf, faLink, faImage, faFont)
+
+Vue.component('font-awesome-icon', FontAwesomeIcon)
+
 Vue.use(VueFire)
 firebase.initializeApp({
   apiKey: 'AIzaSyA3jLSDKdZ5ib3uDpLBDDUuD2ZnJ0JawGQ',
@@ -96,7 +107,7 @@ export const utils = {
         result.pdfBlob = file
 
         // pdf to image
-        var pdfjsLib = window['pdfjs-dist/build/pdf']
+//        var pdfjsLib = window['pdfjs-dist/build/pdf']
         var reader = new FileReader()
         reader.onloadend = function () {
           // console.log(reader.result);

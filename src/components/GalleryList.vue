@@ -33,38 +33,41 @@
 </template>
 
 <script>
-import {
-  db,
-  user
-} from '../main'
-import Navigation from './Navigation.vue'
-export default {
-  name: 'GalleryList',
-  components: {
-    Navigation
-  },
-  created: function () {
-    document.title = 'iDEW Galleries'
-  },
-  data () {
-    return {
-      galleries: [],
-      u: user
+    import {
+        db,
+        user
+    } from '../main'
+    import moment from 'moment'
+    import Navigation from './Navigation.vue'
+    export default {
+        name: 'GalleryList',
+        components: {
+            Navigation
+        },
+        created: function() {
+            document.title = 'iDEW Galleries'
+        },
+        data() {
+            return {
+                galleries: [],
+                u: user
+            }
+        },
+        methods: {
+            lastPostTime: function(d) {
+                if (moment(d).isValid()) {
+                    return moment(d).fromNow()
+                } else return '-'
+            }
+        },
+        firestore() {
+            return {
+                galleries: db.collection('galleries')
+                    .where('public', '==', true)
+                    .orderBy('timestamp', 'desc')
+            }
+        }
     }
-  },
-  methods: {
-    lastPostTime: function (d) {
-      if (moment(d).isValid()) { return moment(d).fromNow() } else return '-'
-    }
-  },
-  firestore () {
-    return {
-      galleries: db.collection('galleries')
-        .where('public', '==', true)
-        .orderBy('timestamp', 'desc')
-    }
-  }
-}
 
 </script>
 

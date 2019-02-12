@@ -6,7 +6,7 @@
                 <h1 id="gallery-title" v-html="gallery.title"></h1>
                 <div id="gallery-prompt" v-html="gallery.prompt"></div>
                 <div v-if="u.data.uid" v-on:click="gotoAddPost" class="button">Add Post</div>
-                <PostList :id="gallery.id" :slug="gallery.slug" :cname="this.$route.params.cname" v-on:post-count="updatePostCount"></PostList>
+                <PostList v-if="gallery.id" :id="gallery.id" :slug="gallery.slug" :cname="this.$route.params.cname" v-on:post-count="updatePostCount"></PostList>
             </div>
         </div>
     </div>

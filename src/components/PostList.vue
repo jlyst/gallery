@@ -16,10 +16,10 @@
                 <div class="post-card-subtitle" v-html="post.classname ? post.classname : '&nbsp;'"></div>
                 <div class="post-card-title" v-html="post.data.title ? post.data.title : 'Untitled'"></div>
                 <div>
-                    <span class="attachment-button" v-if="post.data.pdf" v-html="`<i class='fas fa-file-pdf'></i> PDF`"></span>
-                    <span class="attachment-button" v-if="post.data.link" v-html="`<i class='fas fa-link'></i> LINK`"></span>
-                    <span class="attachment-button" v-if="post.data.image" v-html="`<i class='fas fa-image'></i> IMAGE`"></span>
-                    <span class="attachment-button" v-if="post.data.text" v-html="`<i class='fas fa-font'></i> TEXT`"></span>
+                    <span class="attachment-button" v-if="post.data.pdf"><font-awesome-icon class="pointer" icon="file-pdf" /> PDF</span>
+                    <span class="attachment-button" v-if="post.data.link"><font-awesome-icon class="pointer" icon="link" /> Link</span>
+                    <span class="attachment-button" v-if="post.data.image"><font-awesome-icon class="pointer" icon="image" /> Image</span>
+                    <span class="attachment-button" v-if="post.data.text"><font-awesome-icon class="pointer" icon="font" /> Text</span>
                 </div>
                 <div class='award' v-if="post.award"><i class="fas fa-award"></i>&nbsp;&nbsp;{{post.award}}</div>
             </div>

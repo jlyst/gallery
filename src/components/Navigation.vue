@@ -2,7 +2,7 @@
     <div id="nav-bar">
         <div id="nav-container">
             <div id="nav-left">
-                <div v-if="history" v-on:click="goBack(history)" class="cursor"><i class="pointer fas fa-chevron-left"></i></div>
+                <div v-if="history" v-on:click="goBack(history)" class="cursor"><font-awesome-icon class="pointer" icon="chevron-left" /></div>
                 <div v-else class="logo">&nbsp;</div>
             </div>
             <div id="nav-center">
@@ -11,7 +11,7 @@
             <div id="nav-right">
                 <div v-if="view=='front'">
                     <div v-if="!u.data.uid" class="button" v-on:click="$router.push('/u')">SIGN IN</div>
-                    <div class="profile" v-else v-on:click="$router.push('/u')">&nbsp;<i class="fas fa-user-circle"></i></div>
+                    <div class="profile" v-else v-on:click="$router.push('/u')">&nbsp;<font-awesome-icon class="pointer" icon="user-circle" /></div>
 <!--                    <img v-else class="user-photo" v-on:click="$router.push('/u')" :src="u.data.photoURL">-->
                 </div>
 <!--
