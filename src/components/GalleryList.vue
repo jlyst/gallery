@@ -18,7 +18,7 @@
                 </div>
                 <div v-if="galleries.length">
                     <h2>Public Galleries</h2>
-                    <div v-on:click="$router.push(`/g/${gallery.slug}`)" class="gallery-listing cursor" v-for="(gallery, idx) in galleries" :key="idx">
+                    <div v-on:click="$router.push(`/g/${gallery.slug}`)" :class="`gallery-listing cursor ${gallery.status == 'closed' ? 'closed' : ''}`" v-for="(gallery, idx) in galleries" :key="idx">
                         <h2 v-html="gallery.title"></h2>
                         <div v-if="gallery.postCount && gallery.latestPostTimestamp && gallery.status">
                             <div class="metric" v-html="`Posts | ${gallery.postCount}`"></div>
@@ -134,6 +134,12 @@
         font-weight: normal;
         font-size: 1.3em;
     }
+    
+    .closed {
+       opacity: .3; 
+    }
+    
+    
 
     .metric {
         display: inline-block;

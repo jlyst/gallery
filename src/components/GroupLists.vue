@@ -92,6 +92,17 @@ export default {
       })
       return arr
     },
+      purgeOld: function (ev) {
+          this.studentCodes.forEach(scode => {
+            if (!scode.timestamp) db.collection('studentCodes').doc(scode.id).delete()
+          });
+                                    this.teacherCodes.forEach(scode => {
+            if (!scode.timestamp) db.collection('teacherCodes').doc(scode.id).delete()
+          });
+      this.companyCodes.forEach(scode => {
+            if (!scode.timestamp) db.collection('companyCodes').doc(scode.id).delete()
+          });
+      },
     purge: function (ev) {
       // ev.target.setAttribute("style", "pointer-events:none");
       // ev.target.innerHTML = "purging...";
