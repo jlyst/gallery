@@ -21,7 +21,7 @@
                     <span class="attachment-button" v-if="post.data.image"><font-awesome-icon class="pointer" icon="image" /> Image</span>
                     <span class="attachment-button" v-if="post.data.text"><font-awesome-icon class="pointer" icon="font" /> Text</span>
                 </div>
-                <div class='award' v-if="post.award"><i class="fas fa-award"></i>&nbsp;&nbsp;{{post.award}}</div>
+                <div class='award' v-if="post.award"><font-awesome-icon icon="award" />&nbsp;{{post.award}}</div>
             </div>
         </div>
     </div>

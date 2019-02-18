@@ -12,7 +12,7 @@
                 <div class='post-artifacts'>
                     <div v-if="post.data.image" class="post-artifact">
                         <a class="link-button" target="_blank" :href="post.data.image">
-                            <i class="fas fa-external-link-alt"></i>
+                            <font-awesome-icon class="pointer" icon="external-link-alt" />
                         </a>
                         <img class="post-img" :src="post.data.image">
                     </div>
@@ -22,7 +22,7 @@
                     </div>
                     <div v-if="post.data.link" class="post-artifact">
                         <a class="link-button" target="_blank" :href="post.data.link">
-                            <i class="fas fa-external-link-alt"></i>
+                            <font-awesome-icon class="pointer" icon="external-link-alt" />
                         </a>
                         <div class="big-iframe-holder" v-if="post.data.link.indexOf('repl')>-1">
                             <iframe class="big-frame " frameborder='no' :src="post.data.link"></iframe>
@@ -34,7 +34,7 @@
                     </div>
                     <div v-if="post.data.pdf" class="post-artifact">
                         <a class="link-button" target="_blank" :href="post.data.pdf">
-                            <i class="fas fa-external-link-alt"></i>
+                            <font-awesome-icon class="pointer" icon="external-link-alt" />
                         </a>
                         <div class="big-iframe-holder">
                             <iframe class="big-frame " frameborder='no' :src="post.data.pdf"></iframe>
@@ -43,7 +43,10 @@
                 </div>
                 <div v-if="u.data.uid">
                     <div v-if="isEditor" class="button" v-on:click="deletePost()">Delete Post</div>
-                    <div v-if="isPro || isTeacher">
+                    <div v-if="isTeacher"><input ref="award" :value="post.award" placeholder="Award description...">
+                        <div class="button" v-on:click="updateAward()">Update Award</div>
+                    </div>
+                    <div v-if="(isPro || isTeacher) && gallery.commentPrompt">
                         <h2><small v-if="u.companies.length > 0">As a Member of {{u.companies[0].name}}</small><br>Provide Feedback</h2>
                         <p v-if="gallery.commentPrompt">{{gallery.commentPrompt}}</p>
                         <textarea ref="commentText" rows="4" cols="50" placeholder="Something good ... Something constructive"></textarea>
@@ -76,6 +79,7 @@
                 post: {},
                 u: user,
                 galleries: [{}],
+                posts: [{}],
                 gallery: {}
             }
         },
@@ -105,6 +109,11 @@
             }
         },
         methods: {
+            updateAward: function() {
+                db.collection('posts').doc(this.post.id).update({
+                    award: this.$refs.award.value
+                });
+            },
             postComment: function() {
                 var self = this
                 var cdata = {
@@ -132,10 +141,21 @@
                     })
             },
             deletePost: function() {
+                var self = this;
                 var r = confirm('This will forever remove this post!')
                 if (r == true) {
                     //need to remove files pdf / image / thumbnail
                     db.collection('posts').doc(this.post.id).delete().then(() => {
+                        db.collection('galleries').doc(self.gallery.id).update({
+                                postCount: self.posts.length,
+                                latestPostTimestamp: fs.FieldValue.serverTimestamp()
+                            })
+                            .then(function() {
+                                console.log("Gallery metadata updated");
+                            })
+                            .catch(function(err) {
+                                console.log("error updating postcount or latestPostTimestamp", err);
+                            });
                         this.$router.replace(`/g/${this.$route.params.gslug}`)
                     }).catch((e) => {
                         alert(e)
@@ -147,6 +167,9 @@
             return {
                 post: db.collection('posts')
                     .doc(this.$route.params.pid),
+                posts: db.collection('posts') //just need this for the post count to update gallery meta data
+                    .where('gslug', '==', this.$route.params.gslug)
+                    .orderBy('timestamp', 'desc'),
                 galleries: db.collection('galleries')
                     .where('slug', '==', this.$route.params.gslug)
                     .limit(1)
@@ -168,10 +191,12 @@
 
     .link-button {
         font-size: 1.5em;
-        background: white;
+        background: #eee;
         color: #777;
         padding: 7px 7px 7px 11px;
-        border-radius: 7px;
+        border-radius: 0 0 0 7px;
+        border-bottom: 1px solid #ccc;
+        border-left: 1px solid #ccc;
         position: absolute;
         top: 0px;
         right: 0px;

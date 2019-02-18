@@ -9,6 +9,8 @@ import Post from '@/components/Post'
 import NewPost from '@/components/NewPost'
 import AdminGallery from '@/components/AdminGallery'
 import GroupLists from '@/components/GroupLists'
+import Roster from '@/components/Roster'
+import Code from '@/components/Code'
 
 Vue.use(Router)
 
@@ -53,6 +55,22 @@ export default new Router({
       component: User,
       meta: {
         title: 'User Profile'
+      }
+    },
+    {
+      path: '/roster/:cid',
+      name: 'Roster',
+      component: Roster,
+      meta: {
+        title: 'Roster'
+      }
+    },
+    {
+      path: '/code/:cid',
+      name: 'Code',
+      component: Code,
+      meta: {
+        title: 'Student Code'
       }
     },
     {

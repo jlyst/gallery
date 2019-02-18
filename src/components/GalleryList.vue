@@ -3,12 +3,18 @@
         <Navigation title="Galleries" view="front"></Navigation>
         <div class="page-container">
             <div class="page">
+                <h1>Let us show you<br>what we have done.</h1>
+                
                 <div v-if="!u.data.uid">
-                    <h1>Let us show you<br>what we have done.</h1>
-                    <h2 style="font-weight: 300;">Browse student galleries below. <br>
-                        <span>If you have a code to join a group, <strong><a v-on:click="$router.push(`/u`)">sign in</a></strong> to continue.</span></h2>
-                    <hr>
+                        <h3 style="font-weight: 300;">Browse student galleries below, or if you have a code to join a group, <strong><a v-on:click="$router.push(`/u`)">sign in</a></strong> to continue.</h3>
+                    
                 </div>
+                <div v-else-if="u.classes.length < 1 && u.companies.length < 1">
+                    <h3 style="font-weight: 300;">Browse student galleries below. We noticed you are signed in but not part of a group. If you have a code to join a group, go to <strong><a v-on:click="$router.push(`/u`)">your profile page</a></strong> to enter your code.</h3>
+                </div>
+                <div v-else><h3 style="font-weight: 300;">Browse student galleries below. </h3></div>
+                <br>
+                <hr>
                 <div v-if="u.data.uid">
                     <div v-if="u.classes.length>0">
                         <h2>Your Class<span v-if="u.classes.length>1">es</span></h2>
@@ -18,7 +24,7 @@
                 </div>
                 <div v-if="galleries.length">
                     <h2>Public Galleries</h2>
-                    <div v-on:click="$router.push(`/g/${gallery.slug}`)" :class="`gallery-listing cursor ${gallery.status == 'closed' ? 'closed' : ''}`" v-for="(gallery, idx) in galleries" :key="idx">
+                    <div v-on:click="$router.push(`/g/${gallery.slug}`)" :class="`gallery-listing cursor ${gallery.status}`" v-for="(gallery, idx) in galleries" :key="idx">
                         <h2 v-html="gallery.title"></h2>
                         <div v-if="gallery.postCount && gallery.latestPostTimestamp && gallery.status">
                             <div class="metric" v-html="`Posts | ${gallery.postCount}`"></div>
@@ -135,7 +141,7 @@
         font-size: 1.3em;
     }
     
-    .closed {
+    .archived {
        opacity: .3; 
     }
     

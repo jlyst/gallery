@@ -73,6 +73,24 @@ export default {
         border-radius: 5px;
         display: inline-block;
     }
+    
+    .button-highlight {
+        background-color: #C33;
+        color: white;
+    }
+    
+    .button-dark {
+        background-color: #777;
+        color: white;
+    }
+    
+    .close {
+        text-align: right;
+        font-weight: 400;
+        font-size: 34px;
+        line-height: 55px;
+        margin: -11px 15px;
+    }
 
     .page-container {
         padding-left: calc(100vw - 100%);

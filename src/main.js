@@ -13,10 +13,10 @@ import pdfjsLib from 'pdfjs-dist'
 import loadImage from 'blueimp-load-image'
 
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faChevronLeft, faUserCircle, faFilePdf, faLink, faImage, faFont } from '@fortawesome/free-solid-svg-icons'
+import { faChevronLeft, faChevronRight, faUserCircle, faFilePdf, faLink, faImage, faFont, faAward, faSignOutAlt, faExternalLinkAlt } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
-library.add(faChevronLeft, faUserCircle, faFilePdf, faLink, faImage, faFont)
+library.add(faChevronLeft, faChevronRight, faUserCircle, faFilePdf, faLink, faImage, faFont, faAward, faSignOutAlt, faExternalLinkAlt)
 
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 
