@@ -70,7 +70,8 @@
         watch: {
             galleries: function () {
                 this.orderedGalleries = this.galleries.slice().sort((a, b)=>{
-                    return a.title == "Showcase" ? -1 : 1;
+                    if (a.title == "Showcase") return -1;
+                    if (b.title == "Showcase") return 1;
                 });
             }
         },
