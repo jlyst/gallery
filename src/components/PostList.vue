@@ -23,6 +23,7 @@
                 </div>
                 <div class='award' v-if="post.award"><font-awesome-icon icon="award" />&nbsp;{{post.award}}</div>
             </div>
+            <div v-if="getFilteredPosts(clss).length == 0">No posts yet. Check back later.</div>
         </div>
     </div>
 </template>

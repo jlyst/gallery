@@ -24,7 +24,7 @@
                 </div>
                 <div v-if="galleries.length">
                     <h2>Public Galleries</h2>
-                    <div v-on:click="$router.push(`/g/${gallery.slug}`)" :class="`gallery-listing cursor ${gallery.status}`" v-for="(gallery, idx) in galleries" :key="idx">
+                    <div v-on:click="$router.push(`/g/${gallery.slug}`)" :class="`gallery-listing cursor ${gallery.status}`" v-for="(gallery, idx) in orderedGalleries" :key="idx">
                         <h2 v-html="gallery.title"></h2>
                         <div v-if="gallery.postCount && gallery.latestPostTimestamp && gallery.status">
                             <div class="metric" v-html="`Posts | ${gallery.postCount}`"></div>
@@ -56,7 +56,8 @@
         data() {
             return {
                 galleries: [],
-                u: user
+                u: user,
+                orderedGalleries: []
             }
         },
         methods: {
@@ -64,6 +65,13 @@
                 if (moment(d).isValid()) {
                     return moment(d).fromNow()
                 } else return '-'
+            }
+        },
+        watch: {
+            galleries: function () {
+                this.orderedGalleries = this.galleries.slice().sort((a, b)=>{
+                    return a.title == "Showcase" ? -1 : 1;
+                });
             }
         },
         firestore() {

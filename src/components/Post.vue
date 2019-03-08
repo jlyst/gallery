@@ -53,7 +53,7 @@
                         <br>
                         <div class='button' v-on:click="postComment">Post</div>
                     </div>
-                    <CommentList :pid="post.id" :puid="post.uid" :cid="post.classid"></CommentList>
+                    <CommentList :pid="post.id" :puid="post.uid" :cid="post.classid" :gid="post.gid"></CommentList>
                 </div>
             </div>
         </div>

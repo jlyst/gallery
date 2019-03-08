@@ -19,11 +19,12 @@
     } from '../main'
     export default {
         name: 'CommentList',
-        props: ['pid', 'puid', 'cid'],
+        props: ['pid', 'puid', 'cid', 'gid'],
         data() {
             return {
                 comments: [],
-                u: user
+                u: user,
+                galleryComments: []
             }
         },
         computed: {
@@ -52,23 +53,47 @@
                 }
             },
             setApprove: function(id, approved) {
-                db.collection('comments').doc(id).update({approved:approved});
+                db.collection('comments').doc(id).update({
+                    approved: approved
+                });
+
             }
         },
-
+        watch: {
+            galleryComments: function() {
+                if (this.isTeacher) {
+                    var distinctCompanies = [...new Set(this.galleryComments.map(x => x.companyid))];
+                    var results = distinctCompanies.map(c => {
+                        return {
+                            name: this.galleryComments.find(x => x.companyid == c).companyname,
+                            count: this.galleryComments.filter(x => x.companyid == c).length
+                        }
+                    });
+                    console.log(results);
+                    db.collection('galleries').doc(this.gid).update({
+                        commentCount: this.galleryComments.length,
+                        commentCompanyCount: results
+                    });
+                }
+            }
+        },
         firestore() {
             return {
                 //need is teacher first
                 comments: this.isTeacher ? db.collection('comments')
                     .where('pid', '==', this.pid)
-                    .orderBy('timestamp', 'desc') :
-                    this.puid == this.u.data.uid ? db.collection('comments')
+                    .orderBy('timestamp', 'desc') : this.puid == this.u.data.uid ? db.collection('comments')
                     .where('pid', '==', this.pid)
                     .where('approved', '==', true)
                     .orderBy('timestamp', 'desc') : db.collection('comments')
                     .where('pid', '==', this.pid)
                     .where('uid', '==', this.u.data.uid)
-                    .orderBy('timestamp', 'desc')
+                    .orderBy('timestamp', 'desc'),
+                galleryComments: this.isTeacher ? db.collection('comments')
+                    .where('gid', '==', this.gid)
+                    .where('approved', '==', true) : db.collection('comments')
+                    .where('pid', '==', this.pid)
+                    .where('uid', '==', this.u.data.uid)
             }
         }
     }
