@@ -10,9 +10,10 @@
         <div id="post-list" v-if="!old">
             <div v-for="(post, idx) in getFilteredPosts(clss)" :key="idx" v-on:click="$router.push(`/p/${post.gslug}/${post.id}`)" class="cursor post-card">
                 <div class="thumbnail" v-if="post.data.thumbnail" v-bind:style="{backgroundImage : `url('${post.data.thumbnail}')`}"></div>
-                <div class="thumbnail" v-else>
-                    <div v-if="post.data.text" v-html="post.data.text"></div>
+                <div class="thumbnail" v-else-if="post.data.text">
+                    <div v-html="post.data.text"></div>
                 </div>
+                <div class="thumbnail" v-else-if="post.data.link" v-html="post.data.link"></div>
                 <div class="post-card-subtitle" v-html="post.classname ? post.classname : '&nbsp;'"></div>
                 <div class="post-card-title" v-html="post.data.title ? post.data.title : 'Untitled'"></div>
                 <div>
@@ -177,9 +178,9 @@ export default {
         border-radius: 5px;
         border: 1px solid rgba(0, 0, 0, .2);
         overflow: hidden;
+        word-break: break-all;
         text-overflow: ellipsis;
         font-size: 24px;
-        /*    overflow: hidden;*/
         /*    padding: 5px;*/
     }
 

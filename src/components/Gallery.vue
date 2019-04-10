@@ -5,8 +5,12 @@
             <div class="page">
                 <h1 id="gallery-title" v-html="gallery.title"></h1>
                 <div v-if="gallery.prompt" id="gallery-prompt" v-html="gallery.prompt"></div>
-                <div v-if="gallery.commentCompanyCount" class='company-data'>
-                    <strong>Feedback Contributors</strong><br><div v-for="(c, idx) in gallery.commentCompanyCount">{{c.name}} -  {{c.count}}</div></div>
+                <div v-if="gallery.commentCompanyCount">
+                    <div v-if="gallery.commentCompanyCount.length > 0" class='company-data'>
+                        <strong>Feedback Contributors</strong><br>
+                        <div v-for="(c, idx) in gallery.commentCompanyCount">{{c.name}} - {{c.count}}</div>
+                    </div>
+                </div>
                 <div v-if="(u.data.uid && gallery.status == 'open') && u.classes.length > 0" v-on:click="gotoAddPost" class="button button-highlight">Add Post</div>
                 <PostList v-if="gallery.id" :id="gallery.id" :slug="gallery.slug" :cname="this.$route.params.cname" v-on:post-count="updatePostCount"></PostList>
             </div>
@@ -70,7 +74,7 @@
         color: #555;
         margin-bottom: 7px;
     }
-    
+
     #gallery-title {
         position: relative;
         margin-bottom: .9em;

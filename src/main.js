@@ -19,24 +19,26 @@ import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 library.add(faChevronLeft, faChevronRight, faUserCircle, faFilePdf, faLink, faImage, faFont, faAward, faSignOutAlt, faExternalLinkAlt)
 
 Vue.component('font-awesome-icon', FontAwesomeIcon)
-
 Vue.use(VueFire)
-//firebase.initializeApp({
-//  apiKey: 'AIzaSyA3jLSDKdZ5ib3uDpLBDDUuD2ZnJ0JawGQ',
-//  authDomain: 'idew-2018.firebaseapp.com',
-//  databaseURL: 'https://idew-2018.firebaseio.com',
-//  projectId: 'idew-2018',
-//  storageBucket: 'idew-2018.appspot.com',
-//  messagingSenderId: '259724907208'
-//})
-firebase.initializeApp({
+
+var liveFirebase = {
+  apiKey: 'AIzaSyA3jLSDKdZ5ib3uDpLBDDUuD2ZnJ0JawGQ',
+  authDomain: 'idew-2018.firebaseapp.com',
+  databaseURL: 'https://idew-2018.firebaseio.com',
+  projectId: 'idew-2018',
+  storageBucket: 'idew-2018.appspot.com',
+  messagingSenderId: '259724907208'
+};
+var testFirebase = {
     apiKey: "AIzaSyCdsrCTLxDVK3mEupuUVzuwbMsKrDrFlz8",
     authDomain: "gallery-b1a63.firebaseapp.com",
     databaseURL: "https://gallery-b1a63.firebaseio.com",
     projectId: "gallery-b1a63",
     storageBucket: "gallery-b1a63.appspot.com",
     messagingSenderId: "1098701192986"
-  });
+  };
+firebase.initializeApp(liveFirebase)
+
 export const db = firebase.firestore()
 export const fs = firebase.firestore // for timestamps
 export const storage = firebase.storage().ref()
