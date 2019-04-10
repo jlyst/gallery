@@ -246,7 +246,7 @@
                 ev.target.innerHTML = 'saving...'
                 db.collection('classes').add(newC).then((docRef) => {
                     var id = docRef.id;
-//                    this.createGallery(id);
+                    this.createGallery(id, newC.name);
                     this.setClassCodes(id, sCode, tCode)
                     reset(this)
                 })
@@ -259,16 +259,17 @@
                     self.$refs.newClassStudentCode.value = ''
                 }
             },
-            createGallery: function(id) {
-                var g={
-                    title: "Untitled",
-                    prompt: "Do this",
+            createGallery: function(id, name) {
+                var g = {
+                    title: name,
+                    prompt: "This is a private gallery for your class use.",
                     commentPrompt: "Be nice",
                     slug: id,
-                    public: false
+                    public: false,
+                    status: "open"
                 };
                 this.ut.addGallery(g);
-//                this.$router.push(`/g/${g.slug}`)
+                //                this.$router.push(`/g/${g.slug}`)
             },
             addCompany: function(ev) {
                 var newC = {}
@@ -328,18 +329,25 @@
                 }
             },
             deleteClass: function(id, idx, ev) {
-                var r = confirm('This will forever delete this group and private gallaries, but will not remove the associated posts!')
+                var r = confirm('This will forever delete this group and private gallary, but will not remove the associated posts!')
                 if (r == true) {
                     ev.target.setAttribute('style', 'pointer-events:none')
                     ev.target.innerHTML = 'deleting...'
-                    //                    var sCode = this.$refs.studentCode[idx].value;
-                    //                    var tCode = this.$refs.teacherCode[idx].value;
+                    var sCode = this.$refs.studentCode[idx].value;
+                    var tCode = this.$refs.teacherCode[idx].value;
                     if (id) {
                         console.log('deleting ', this.$refs.name[idx].value)
-                        db.collection('classes').doc(id).delete()
-                        //                        db.collection("studentCodes").doc(sCode).delete();
-                        //                        db.collection("teacherCodes").doc(tCode).delete();
+                        db.collection('classes').doc(id).delete();
+                        db.collection("studentCodes").doc(sCode).delete();
+                        db.collection("teacherCodes").doc(tCode).delete();
+                        //delete joins too?
                         // this.$router.push(`/`);
+                        db.collection('galleries').where('slug', '==', id).get()
+                            .then(function(querySnapshot) {
+                                querySnapshot.forEach(function(doc) {
+                                    db.collection('galleries').doc(doc.id).delete();
+                                })
+                            });
                     }
                 }
             },
