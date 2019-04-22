@@ -16,6 +16,7 @@
                 <div class="thumbnail" v-else-if="post.data.link" v-html="post.data.link"></div>
                 <div class="post-card-subtitle" v-html="post.classname ? post.classname : '&nbsp;'"></div>
                 <div class="post-card-title" v-html="post.data.title ? post.data.title : 'Untitled'"></div>
+                <div class="post-card-subtitle">{{post.commentCount?post.commentCount: 0}} Comments <span v-if="post.commentCount">({{(post.commentCount?post.commentCount:0) - (post.commentApprovedCount?post.commentApprovedCount:0)}} awaiting approval)</span></div>
                 <div>
                     <span class="attachment-button" v-if="post.data.pdf"><font-awesome-icon class="pointer" icon="file-pdf" /> PDF</span>
                     <span class="attachment-button" v-if="post.data.link"><font-awesome-icon class="pointer" icon="link" /> Link</span>
